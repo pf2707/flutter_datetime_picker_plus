@@ -37,6 +37,13 @@ enum LocaleType {
   uk,
   he,
   hi,
+  bs,
+  cs,
+  el,
+  hr,
+  sk,
+  sl,
+  sr
 }
 
 final _i18nModel = <LocaleType, Map<String, Object>>{
@@ -1453,6 +1460,262 @@ final _i18nModel = <LocaleType, Map<String, Object>>{
     'am': 'सुबह',
     'pm': 'दोपहर'
   },
+  LocaleType.bs: {
+  'cancel': 'Otkazati',
+  'done': 'Gotovo',
+  'today': 'Danas',
+  'monthShort': [
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+    'Maj',
+    'Jun',
+    'Jul',
+    'Aug',
+    'Sep',
+    'Okt',
+    'Nov',
+    'Dec'
+  ],
+  'monthLong': [
+    'Januar',
+    'Februar',
+    'Mart',
+    'April',
+    'Maj',
+    'Juni',
+    'Juli',
+    'August',
+    'Septembar',
+    'Oktobar',
+    'Novembar',
+    'Decembar'
+  ],
+  'day': ['Pon', 'Uto', 'Sri', 'Čet', 'Pet', 'Sub', 'Ned'],
+  'am': 'AM',
+  'pm': 'PM'
+},
+
+LocaleType.cs: {
+  'cancel': 'Zrušit',
+  'done': 'Hotovo',
+  'today': 'Dnes',
+  'monthShort': [
+    'Led',
+    'Úno',
+    'Bře',
+    'Dub',
+    'Kvě',
+    'Čer',
+    'Čvc',
+    'Srp',
+    'Zář',
+    'Říj',
+    'Lis',
+    'Pro'
+  ],
+  'monthLong': [
+    'Leden',
+    'Únor',
+    'Březen',
+    'Duben',
+    'Květen',
+    'Červen',
+    'Červenec',
+    'Srpen',
+    'Září',
+    'Říjen',
+    'Listopad',
+    'Prosinec'
+  ],
+  'day': ['Po', 'Út', 'St', 'Čt', 'Pá', 'So', 'Ne'],
+  'am': 'AM',
+  'pm': 'PM'
+},
+LocaleType.el: {
+  'cancel': 'Ακύρωση',
+  'done': 'Ολοκλήρωση',
+  'today': 'Σήμερα',
+  'monthShort': [
+    'Ιαν',
+    'Φεβ',
+    'Μάρ',
+    'Απρ',
+    'Μάι',
+    'Ιούν',
+    'Ιούλ',
+    'Αύγ',
+    'Σεπ',
+    'Οκτ',
+    'Νοέ',
+    'Δεκ'
+  ],
+  'monthLong': [
+    'Ιανουάριος',
+    'Φεβρουάριος',
+    'Μάρτιος',
+    'Απρίλιος',
+    'Μάιος',
+    'Ιούνιος',
+    'Ιούλιος',
+    'Αύγουστος',
+    'Σεπτέμβριος',
+    'Οκτώβριος',
+    'Νοέμβριος',
+    'Δεκέμβριος'
+  ],
+  'day': ['Δευ', 'Τρί', 'Τετ', 'Πέμ', 'Παρ', 'Σάβ', 'Κυρ'],
+  'am': 'πμ',
+  'pm': 'μμ'
+},
+
+LocaleType.hr: {
+  'cancel': 'Odustani',
+  'done': 'Gotovo',
+  'today': 'Danas',
+  'monthShort': [
+    'Sij',
+    'Velj',
+    'Ožu',
+    'Tra',
+    'Svi',
+    'Lip',
+    'Srp',
+    'Kol',
+    'Ruj',
+    'Lis',
+    'Stu',
+    'Pro'
+  ],
+  'monthLong': [
+    'Siječanj',
+    'Veljača',
+    'Ožujak',
+    'Travanj',
+    'Svibanj',
+    'Lipanj',
+    'Srpanj',
+    'Kolovoz',
+    'Rujan',
+    'Listopad',
+    'Studeni',
+    'Prosinac'
+  ],
+  'day': ['Pon', 'Uto', 'Sri', 'Čet', 'Pet', 'Sub', 'Ned'],
+  'am': 'AM',
+  'pm': 'PM'
+},
+
+LocaleType.sk: {
+  'cancel': 'Zrušiť',
+  'done': 'Hotovo',
+  'today': 'Dnes',
+  'monthShort': [
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+    'Máj',
+    'Jún',
+    'Júl',
+    'Aug',
+    'Sep',
+    'Okt',
+    'Nov',
+    'Dec'
+  ],
+  'monthLong': [
+    'Január',
+    'Február',
+    'Marec',
+    'Apríl',
+    'Máj',
+    'Jún',
+    'Júl',
+    'August',
+    'September',
+    'Október',
+    'November',
+    'December'
+  ],
+  'day': ['Po', 'Ut', 'St', 'Št', 'Pi', 'So', 'Ne'],
+  'am': 'AM',
+  'pm': 'PM'
+},
+
+LocaleType.sl: {
+  'cancel': 'Prekliči',
+  'done': 'Končano',
+  'today': 'Danes',
+  'monthShort': [
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+    'Maj',
+    'Jun',
+    'Jul',
+    'Avg',
+    'Sep',
+    'Okt',
+    'Nov',
+    'Dec'
+  ],
+  'monthLong': [
+    'Januar',
+    'Februar',
+    'Marec',
+    'April',
+    'Maj',
+    'Junij',
+    'Julij',
+    'Avgust',
+    'September',
+    'Oktober',
+    'November',
+    'December'
+  ],
+  'day': ['Pon', 'Tor', 'Sre', 'Čet', 'Pet', 'Sob', 'Ned'],
+  'am': 'AM',
+  'pm': 'PM'
+},
+LocaleType.sr: {
+  'cancel': 'Откажи',
+  'done': 'Завршено',
+  'today': 'Данас',
+  'monthShort': [
+    'Јан',
+    'Феб',
+    'Мар',
+    'Апр',
+    'Мај',
+    'Јун',
+    'Јул',
+    'Авг',
+    'Сеп',
+    'Окт',
+    'Нов',
+    'Дец'
+  ],
+  'monthLong': [
+    'Јануар',
+    'Фебруар',
+    'Март',
+    'Април',
+    'Мај',
+    'Јун',
+    'Јул',
+    'Август',
+    'Септембар',
+    'Октобар',
+    'Новембар',
+    'Децембар'
+  ],
+  'day': ['Пон', 'Уто', 'Сре', 'Чет', 'Пет', 'Суб', 'Нед'],
+  'am': 'AM',
+  'pm': 'PM'
+},
 };
 
 /// Get international object for [localeType]
