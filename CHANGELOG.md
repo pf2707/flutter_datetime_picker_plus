@@ -1,3 +1,5 @@
+## [2.2.0] 
+Added translations for bs,cs,el,hr,sk,sl,sr 
 ## [2.1.0] - Indian translations
 ## [2.0.1] - Force flutter 3.10.0 / dart 3.0.0
 ## [2.0.0] - Support flutter 3.10.0 / dart 3.0.0
