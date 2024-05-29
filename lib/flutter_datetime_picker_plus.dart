@@ -15,6 +15,7 @@ export 'package:flutter_datetime_picker_plus/src/i18n_model.dart';
 
 typedef DateChangedCallback(DateTime time);
 typedef DateCancelledCallback();
+typedef DateResetCallback();
 typedef String? StringAtIndexCallBack(int index);
 
 class DatePicker {
@@ -29,6 +30,7 @@ class DatePicker {
     DateChangedCallback? onChanged,
     DateChangedCallback? onConfirm,
     DateCancelledCallback? onCancel,
+    DateResetCallback? onReset,
     locale = LocaleType.en,
     DateTime? currentTime,
     picker_theme.DatePickerTheme? theme,
@@ -40,6 +42,7 @@ class DatePicker {
         onChanged: onChanged,
         onConfirm: onConfirm,
         onCancel: onCancel,
+        onReset: onReset,
         locale: locale,
         theme: theme,
         barrierLabel:
@@ -63,6 +66,7 @@ class DatePicker {
     bool showSecondsColumn = true,
     DateChangedCallback? onChanged,
     DateChangedCallback? onConfirm,
+    DateResetCallback? onReset,
     DateCancelledCallback? onCancel,
     locale = LocaleType.en,
     DateTime? currentTime,
@@ -75,6 +79,7 @@ class DatePicker {
         onChanged: onChanged,
         onConfirm: onConfirm,
         onCancel: onCancel,
+        onReset: onReset,
         locale: locale,
         theme: theme,
         barrierLabel:
@@ -97,6 +102,7 @@ class DatePicker {
     DateChangedCallback? onChanged,
     DateChangedCallback? onConfirm,
     DateCancelledCallback? onCancel,
+    DateResetCallback? onReset,
     locale = LocaleType.en,
     DateTime? currentTime,
     picker_theme.DatePickerTheme? theme,
@@ -108,6 +114,7 @@ class DatePicker {
         onChanged: onChanged,
         onConfirm: onConfirm,
         onCancel: onCancel,
+        onReset: onReset,
         locale: locale,
         theme: theme,
         barrierLabel:
@@ -131,6 +138,7 @@ class DatePicker {
     DateChangedCallback? onChanged,
     DateChangedCallback? onConfirm,
     DateCancelledCallback? onCancel,
+    DateResetCallback? onReset,
     locale = LocaleType.en,
     DateTime? currentTime,
     picker_theme.DatePickerTheme? theme,
@@ -142,6 +150,7 @@ class DatePicker {
         onChanged: onChanged,
         onConfirm: onConfirm,
         onCancel: onCancel,
+        onReset: onReset,
         locale: locale,
         theme: theme,
         barrierLabel:
@@ -165,6 +174,7 @@ class DatePicker {
     DateChangedCallback? onChanged,
     DateChangedCallback? onConfirm,
     DateCancelledCallback? onCancel,
+    DateResetCallback? onReset,
     locale = LocaleType.en,
     BasePickerModel? pickerModel,
     picker_theme.DatePickerTheme? theme,
@@ -176,6 +186,7 @@ class DatePicker {
         onChanged: onChanged,
         onConfirm: onConfirm,
         onCancel: onCancel,
+        onReset: onReset,
         locale: locale,
         theme: theme,
         barrierLabel:
@@ -192,6 +203,7 @@ class _DatePickerRoute<T> extends PopupRoute<T> {
     this.onChanged,
     this.onConfirm,
     this.onCancel,
+    this.onReset,
     picker_theme.DatePickerTheme? theme,
     this.barrierLabel,
     this.locale,
@@ -199,15 +211,19 @@ class _DatePickerRoute<T> extends PopupRoute<T> {
     BasePickerModel? pickerModel,
   })  : this.pickerModel = pickerModel ?? DatePickerModel(),
         this.theme = theme ?? picker_theme.DatePickerTheme(),
-        super(settings: settings);
+        super(settings: settings) {
+    clonedPickerModel = pickerModel?.clone();
+  }
 
   final bool? showTitleActions;
   final DateChangedCallback? onChanged;
   final DateChangedCallback? onConfirm;
   final DateCancelledCallback? onCancel;
+  final DateResetCallback? onReset;
   final LocaleType? locale;
   final picker_theme.DatePickerTheme theme;
   final BasePickerModel pickerModel;
+  BasePickerModel? clonedPickerModel;
 
   @override
   Duration get transitionDuration => const Duration(milliseconds: 200);
@@ -333,7 +349,41 @@ class _DatePickerState extends State<_DatePickerComponent> {
       return Column(
         children: <Widget>[
           _renderTitleActionsView(theme),
-          itemView,
+
+          Expanded(
+            child: itemView,
+          ),
+
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: TextButton(
+              style: TextButton.styleFrom(padding: EdgeInsets.zero),
+              onPressed: () {
+                Navigator.pop(context, widget.pickerModel.finalTime());
+                if (widget.route.onConfirm != null) {
+                  widget.route.onConfirm!(widget.pickerModel.finalTime()!);
+                }
+              },
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Container(
+                  height: 40,
+                  decoration: BoxDecoration(
+                    color: theme.confirmBackgroundColor ?? Colors.blue,
+                    borderRadius: theme.confirmBorderRadius ?? const BorderRadius.all(Radius.circular(8.0))
+                  ),
+                  child: Center(
+                    child: Text(
+                      theme.confirmString,
+                      style: theme.confirmStyle,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+
+          SizedBox(height: 20,)
         ],
       );
     }
@@ -353,8 +403,8 @@ class _DatePickerState extends State<_DatePickerComponent> {
       flex: layoutProportion,
       child: Container(
         padding: EdgeInsets.all(8.0),
-        height: theme.containerHeight,
-        decoration: BoxDecoration(color: theme.backgroundColor),
+        height: theme.containerHeight - 60,
+        // decoration: BoxDecoration(color: Colors.yellow),
         child: NotificationListener(
           onNotification: (ScrollNotification notification) {
             if (notification.depth == 0 &&
@@ -473,8 +523,8 @@ class _DatePickerState extends State<_DatePickerComponent> {
 
   // Title View
   Widget _renderTitleActionsView(picker_theme.DatePickerTheme theme) {
-    final done = _localeDone();
-    final cancel = _localeCancel();
+    final done = theme.doneString.isNotEmpty ? theme.doneString : _localeDone();
+    final cancel = theme.cancelString.isNotEmpty ? theme.cancelString : _localeCancel();
 
     return Container(
       height: theme.titleHeight,
@@ -501,6 +551,12 @@ class _DatePickerState extends State<_DatePickerComponent> {
               },
             ),
           ),
+
+          Text(
+            theme.titleString,
+            style: theme.titleStyle,
+          ),
+
           Container(
             height: theme.titleHeight,
             child: CupertinoButton(
@@ -511,9 +567,8 @@ class _DatePickerState extends State<_DatePickerComponent> {
                 style: theme.doneStyle,
               ),
               onPressed: () {
-                Navigator.pop(context, widget.pickerModel.finalTime());
-                if (widget.route.onConfirm != null) {
-                  widget.route.onConfirm!(widget.pickerModel.finalTime()!);
+                if (widget.route.onReset != null) {
+                  widget.route.onReset!();
                 }
               },
             ),

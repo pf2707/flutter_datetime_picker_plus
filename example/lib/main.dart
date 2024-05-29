@@ -108,22 +108,37 @@ class HomePage extends StatelessWidget {
                   picker.DatePicker.showDatePicker(context,
                       showTitleActions: true,
                       minTime: DateTime(2018, 3, 5),
-                      maxTime: DateTime(2019, 6, 7),
+                      maxTime: DateTime.now(),
                       theme: picker.DatePickerTheme(
-                          headerColor: Colors.orange,
-                          backgroundColor: Colors.blue,
-                          itemStyle: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18),
-                          doneStyle:
-                              TextStyle(color: Colors.white, fontSize: 16)),
+                        headerColor: Colors.white,
+                        backgroundColor: Colors.white,
+                        containerHeight: 280,
+                        itemStyle: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 18),
+                        cancelString: "Cancel",
+                        cancelStyle: TextStyle(color: Colors.blue, fontSize: 16),
+                        doneString: "Reset",
+                        doneStyle: TextStyle(color: Colors.blue, fontSize: 16),
+                        confirmString: "Confirm",
+                        confirmStyle: TextStyle(color: Colors.white, fontSize: 16),
+                        confirmBackgroundColor: Colors.blueAccent,
+                        confirmBorderRadius: const BorderRadius.all(Radius.circular(8))
+                      ),
                       onChanged: (date) {
-                    print('change $date in time zone ' +
+                        print('change $date in time zone ' +
                         date.timeZoneOffset.inHours.toString());
-                  }, onConfirm: (date) {
-                    print('confirm $date');
-                  }, currentTime: DateTime.now(), locale: picker.LocaleType.en);
+                      },
+                      onConfirm: (date) {
+                        print('confirm $date');
+                      },
+                      onCancel: () {
+
+                      },
+                      onReset: () {
+
+                      },
+                      currentTime: DateTime.now(),
+                      locale: picker.LocaleType.en)
+                  ;
                 },
                 child: Text(
                   'show date picker(custom theme &date time range)',

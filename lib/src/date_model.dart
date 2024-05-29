@@ -45,6 +45,8 @@ abstract class BasePickerModel {
 
   //layout proportions for 3 columns
   List<int> layoutProportions();
+
+  BasePickerModel clone();
 }
 
 //a base class for picker data model
@@ -126,6 +128,14 @@ class CommonPickerModel extends BasePickerModel {
   DateTime? finalTime() {
     return null;
   }
+
+  @override
+  BasePickerModel clone() {
+    // TODO: implement clone
+    return CommonPickerModel(
+      locale: locale
+    );
+  }
 }
 
 //a date picker model
@@ -160,6 +170,17 @@ class DatePickerModel extends CommonPickerModel {
     _currentLeftIndex = this.currentTime.year - this.minTime.year;
     _currentMiddleIndex = this.currentTime.month - minMonth;
     _currentRightIndex = this.currentTime.day - minDay;
+  }
+
+  @override
+  BasePickerModel clone() {
+    // TODO: implement clone
+    return DatePickerModel(
+      currentTime: currentTime,
+      maxTime: maxTime,
+      minTime: minTime,
+      locale: locale
+    );
   }
 
   void _fillLeftLists() {
